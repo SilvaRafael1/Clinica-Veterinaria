@@ -2,14 +2,14 @@
   "name": "desafio-semana-8",
   "version": "1.0.0",
   "description": "<p align=\"center\">\r Projeto Clínica Veterinária\r Parte 2",
-  "main": "index.js",
+  "main": "dist/app.js",
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/app.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/app.js\""
   },
   "keywords": [],
-  "author": "",
+  "author": "Rafael Augusto da Silva",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.3.1",
