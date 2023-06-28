@@ -23,7 +23,7 @@ const connect_1 = require("./db/connect");
 // middleware
 app.use(express_1.default.json());
 // route
-app.use("/", router);
+app.use("", router);
 const port = process.env.PORT || 3000;
 const start = () => __awaiter(void 0, void 0, void 0, function* () {
     try {

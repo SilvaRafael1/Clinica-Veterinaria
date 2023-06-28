@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -14,7 +14,7 @@ import { connectDB } from './db/connect'
 app.use(express.json())
 
 // route
-app.use("/", router);
+app.use("", router);
 
 const port = process.env.PORT || 3000;
 const start = async () => {

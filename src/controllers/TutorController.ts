@@ -1,20 +1,19 @@
 import { Request, Response } from "express";
-const StatusCodes = require("http-status-code");
 
 const getTutors = (req: Request, res: Response) => {
-  res.status(StatusCodes.OK).json({ msg: "getTutors" });
+  res.status(200).json({ msg: "getTutors" });
 };
 
 const createTutor = (req: Request, res: Response) => {
-  res.status(200).json({ msg: "getTutors" });
+  res.status(200).json({ msg: "createTutor" });
 };
 
 const updateTutor = (req: Request, res: Response) => {
-  res.status(200).json({ msg: "getTutors" });
+  res.status(200).json({ msg: "updateTutor" });
 };
 
 const deleteTutor = (req: Request, res: Response) => {
-  res.status(200).json({ msg: "getTutors" });
+  res.status(200).json({ msg: "deleteTutor" });
 };
 
 module.exports = {
