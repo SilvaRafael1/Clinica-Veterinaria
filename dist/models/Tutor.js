@@ -7,30 +7,31 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const TutorSchema = new mongoose_1.default.Schema({
     name: {
         type: String,
-        require: [true, "Please provide a name"],
+        required: [true, "Please provide a name"],
         minlenght: 3,
     },
     phone: {
         type: String,
-        require: [true, "Please provide a name"],
+        required: [true, "Please provide a phone"],
         minlenght: 3,
     },
     email: {
         type: String,
-        unique: true,
-        require: [true, "Please provide a email"],
+        required: [true, "Please provide a email"],
         match: [
-            /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-            "Please fill a valid email address",
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            "Please provide a valid email",
         ],
+        unique: true,
     },
     date_of_birth: {
         type: Date,
-        require: [true, "Please provide a date of birth"],
+        required: [true, "Please provide a date of birth"],
     },
     zipcode: {
         type: String,
-        require: [true, "Please provide a zipcode"],
+        required: [true, "Please provide a zipcode"],
     },
 });
-module.exports = mongoose_1.default.model("Tutor", TutorSchema);
+const TutorModel = mongoose_1.default.model("Tutor", TutorSchema);
+exports.default = TutorModel;

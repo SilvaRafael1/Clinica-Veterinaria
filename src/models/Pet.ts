@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { model } from "mongoose";
 
 const PetSchema = new mongoose.Schema({
   name: {
@@ -25,4 +25,5 @@ const PetSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Pet", PetSchema);
+const PetModel = model<mongoose.Schema>("Pet", PetSchema)
+export default PetModel
