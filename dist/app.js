@@ -17,14 +17,13 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 // imports
+const router = require('./routes/routes');
 // database
 const connect_1 = require("./db/connect");
 // middleware
 app.use(express_1.default.json());
 // route
-app.get('/desafio', (req, res) => {
-    res.send('Teste');
-});
+app.use("/", router);
 const port = process.env.PORT || 3000;
 const start = () => __awaiter(void 0, void 0, void 0, function* () {
     try {

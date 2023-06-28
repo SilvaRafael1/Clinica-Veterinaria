@@ -5,6 +5,7 @@ dotenv.config();
 const app : Express = express();
 
 // imports
+const router = require('./routes/routes')
 
 // database
 import { connectDB } from './db/connect'
@@ -13,9 +14,7 @@ import { connectDB } from './db/connect'
 app.use(express.json())
 
 // route
-app.get('/desafio', (req:Request, res:Response) => {
-  res.send('Teste')
-})
+app.use("/", router);
 
 const port = process.env.PORT || 3000;
 const start = async () => {
