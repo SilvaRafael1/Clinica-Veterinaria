@@ -7,7 +7,7 @@ const createPet = async (req: Request, res: Response) => {
   try {
     const pet = await PetModel.create(req.body);
     const tutor = await TutorModel.findOne({ _id: tutorId })
-    tutor?.pets.push(pet)
+    tutor?.pets.push(pet._id)
     await tutor?.save()
     res.status(200).json({ pet: pet, tutor: tutor });
   } catch (error:any) {

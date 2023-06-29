@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import TutorModel from "../models/Tutor";
 
 const getTutors = async (req: Request, res: Response) => {
-  const tutors = await TutorModel.find({});
+  const tutors = await TutorModel.find({}).populate('pets');
   if (!tutors) {
     res.send(404).json({ success: false, msg: "Tutors not found" });
   }
@@ -34,9 +34,12 @@ const updateTutor = async (req: Request, res: Response) => {
 
 const deleteTutor = async (req: Request, res: Response) => {
   const { id } = req.params;
-
   try {
-    const tutor = await TutorModel.findByIdAndRemove({ _id: id });
+    const tutor = await TutorModel.findOne({ _id: id })
+    if (tutor?.pets.length !== 0) {
+      return res.status(400).json({ success: false, msg: "Tutor have pets associated" });
+    }
+    await TutorModel.findByIdAndRemove({ _id: id });
     res.status(204).json({});
   } catch (error) {
     res.status(404).json({ success: false, msg: "Tutor not found" });

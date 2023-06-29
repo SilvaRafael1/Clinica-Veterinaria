@@ -35,7 +35,13 @@ const TutorSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide a zipcode"],
   },
-  pets: [Object]
+  // pets: [Schema.Types.ObjectId]
+  pets: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Pet'
+    }
+  ]
 })
 
 TutorSchema.pre('save', async function () {

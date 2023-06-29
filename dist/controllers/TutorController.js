@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Tutor_1 = __importDefault(require("../models/Tutor"));
 const getTutors = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const tutors = yield Tutor_1.default.find({});
+    const tutors = yield Tutor_1.default.find({}).populate('pets');
     if (!tutors) {
         res.send(404).json({ success: false, msg: "Tutors not found" });
     }
@@ -46,7 +46,11 @@ const updateTutor = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 const deleteTutor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
-        const tutor = yield Tutor_1.default.findByIdAndRemove({ _id: id });
+        const tutor = yield Tutor_1.default.findOne({ _id: id });
+        if ((tutor === null || tutor === void 0 ? void 0 : tutor.pets.length) !== 0) {
+            return res.status(400).json({ success: false, msg: "Tutor have pets associated" });
+        }
+        yield Tutor_1.default.findByIdAndRemove({ _id: id });
         res.status(204).json({});
     }
     catch (error) {

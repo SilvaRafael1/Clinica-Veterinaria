@@ -19,7 +19,7 @@ const createPet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const pet = yield Pet_1.default.create(req.body);
         const tutor = yield Tutor_1.default.findOne({ _id: tutorId });
-        tutor === null || tutor === void 0 ? void 0 : tutor.pets.push(pet);
+        tutor === null || tutor === void 0 ? void 0 : tutor.pets.push(pet._id);
         yield (tutor === null || tutor === void 0 ? void 0 : tutor.save());
         res.status(200).json({ pet: pet, tutor: tutor });
     }
