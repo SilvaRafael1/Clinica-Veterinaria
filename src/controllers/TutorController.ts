@@ -35,8 +35,9 @@ const updateTutor = async (req: Request, res: Response) => {
 const deleteTutor = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const tutor = await TutorModel.findOne({ _id: id })
+    const tutor = await TutorModel.findOne({ _id: id }).populate('pets')
     if (tutor?.pets.length !== 0) {
+      console.log(tutor?.pets.length)
       return res.status(400).json({ success: false, msg: "Tutor have pets associated" });
     }
     await TutorModel.findByIdAndRemove({ _id: id });

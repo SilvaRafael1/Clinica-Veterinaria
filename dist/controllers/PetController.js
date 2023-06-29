@@ -21,18 +21,48 @@ const createPet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const tutor = yield Tutor_1.default.findOne({ _id: tutorId });
         tutor === null || tutor === void 0 ? void 0 : tutor.pets.push(pet._id);
         yield (tutor === null || tutor === void 0 ? void 0 : tutor.save());
-        res.status(200).json({ pet: pet, tutor: tutor });
+        res.status(200).json({ pet: pet });
     }
     catch (error) {
         res.status(400).json({ success: false, msg: error.message });
     }
 });
-const updatePet = (req, res) => {
-    res.status(200).json({ msg: "updatePet" });
-};
-const deletePet = (req, res) => {
-    res.status(200).json({ msg: "deletePet" });
-};
+const updatePet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { petId, tutorId } = req.params;
+    try {
+        const pet = yield Pet_1.default.findOne({ _id: petId });
+        if (!pet) {
+            return res.status(404).json({ success: false, msg: "Pet not found" });
+        }
+        const tutor = yield Tutor_1.default.findOne({ _id: tutorId });
+        if (!tutor) {
+            return res.status(404).json({ success: false, msg: "Tutor not found" });
+        }
+        const petUpdated = yield Pet_1.default.findOneAndUpdate({ _id: petId }, req.body);
+        res.status(200).json({ success: true, msg: "Pet updated", data: petUpdated });
+    }
+    catch (error) {
+        res.status(404).json({ success: false, msg: "Pet not found" });
+    }
+});
+const deletePet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { petId, tutorId } = req.params;
+    try {
+        const pet = yield Pet_1.default.findOne({ _id: petId });
+        if (!pet) {
+            return res.status(404).json({ success: false, msg: "Pet not found" });
+        }
+        const tutor = yield Tutor_1.default.findOne({ _id: tutorId });
+        if (!tutor) {
+            return res.status(404).json({ success: false, msg: "Tutor not found" });
+        }
+        yield Pet_1.default.findOneAndRemove({ _id: petId });
+        res.status(204).json({});
+    }
+    catch (error) {
+        res.status(400).json({ success: false, msg: error.message });
+    }
+});
 module.exports = {
     createPet,
     updatePet,

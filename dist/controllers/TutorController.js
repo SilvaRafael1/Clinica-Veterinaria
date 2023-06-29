@@ -46,8 +46,9 @@ const updateTutor = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 const deleteTutor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
-        const tutor = yield Tutor_1.default.findOne({ _id: id });
+        const tutor = yield Tutor_1.default.findOne({ _id: id }).populate('pets');
         if ((tutor === null || tutor === void 0 ? void 0 : tutor.pets.length) !== 0) {
+            console.log(tutor === null || tutor === void 0 ? void 0 : tutor.pets.length);
             return res.status(400).json({ success: false, msg: "Tutor have pets associated" });
         }
         yield Tutor_1.default.findByIdAndRemove({ _id: id });
