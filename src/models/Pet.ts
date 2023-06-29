@@ -1,29 +1,29 @@
-import mongoose, { model } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const PetSchema = new mongoose.Schema({
   name: {
     type: String,
-    require: [true, "Please provide a name"],
+    required: [true, "Please provide a name"],
     minlenght: 3,
   },
   specie: {
     type: String,
-    require: [true, "Please provide a specie"],
+    required: [true, "Please provide a specie"],
     minlenght: 3,
   },
   carry: {
     type: String,
-    require: [true, "Please provide a carry"],
+    required: [true, "Please provide a carry"],
   },
   weight: {
     type: Number,
-    require: [true, "Please provide a weight"],
+    required: [true, "Please provide a weight"],
   },
   date_of_birth: {
     type: Date,
-    require: [true, "Please provide a date of birth"],
+    required: [true, "Please provide a date of birth"],
   },
 });
 
-const PetModel = model<mongoose.Schema>("Pet", PetSchema)
+const PetModel = mongoose.model("Pet", PetSchema)
 export default PetModel

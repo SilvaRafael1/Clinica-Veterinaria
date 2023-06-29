@@ -48,6 +48,7 @@ const TutorSchema = new mongoose_1.default.Schema({
         type: String,
         required: [true, "Please provide a zipcode"],
     },
+    pets: [Object]
 });
 TutorSchema.pre('save', function () {
     return __awaiter(this, void 0, void 0, function* () {

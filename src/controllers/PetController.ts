@@ -1,8 +1,19 @@
 import { Request, Response } from "express";
-const StatusCodes = require("http-status-code");
+import TutorModel from "../models/Tutor";
+import PetModel from "../models/Pet";
 
-const createPet = (req: Request, res: Response) => {
-  res.status(200).json({ msg: "createPet" });
+const createPet = async (req: Request, res: Response) => {
+  const {tutorId} = req.params
+  try {
+    const pet = await PetModel.create(req.body);
+    const tutor = await TutorModel.findOne({ _id: tutorId })
+    tutor?.pets.push(pet)
+    await tutor?.save()
+    res.status(200).json({ pet: pet, tutor: tutor });
+  } catch (error:any) {
+    res.status(400).json({ success: false, msg: error.message });
+  }
+  
 };
 
 const updatePet = (req: Request, res: Response) => {
