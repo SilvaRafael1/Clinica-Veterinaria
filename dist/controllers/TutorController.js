@@ -16,22 +16,33 @@ const Tutor_1 = __importDefault(require("../models/Tutor"));
 const getTutors = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const tutors = yield Tutor_1.default.find({});
     if (!tutors) {
-        res.send(404).json({ success: "false", msg: "Tutors not found" });
+        res.send(404).json({ success: false, msg: "Tutors not found" });
     }
     res.status(200).json({ tutors });
 });
 const createTutor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const tutor = yield Tutor_1.default.create(req.body);
-        res.status(201).json({ success: "true", data: tutor });
+        res.status(201).json({ success: true, data: tutor });
     }
     catch (error) {
-        res.status(400).json({ success: "false", msg: error.message });
+        res.status(400).json({ success: false, msg: error.message });
     }
 });
-const updateTutor = (req, res) => {
-    res.status(200).json({ msg: "updateTutor" });
-};
+const updateTutor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    try {
+        yield Tutor_1.default.findOneAndUpdate({ _id: id }, req.body);
+        const tutor = yield Tutor_1.default.findOne({ _id: id });
+        if (!tutor) {
+            return res.status(404).json({ success: false, msg: "Tutor not found" });
+        }
+        res.status(200).json({ success: true, msg: "Tutor updated", data: tutor });
+    }
+    catch (error) {
+        res.status(404).json({ success: false, msg: "Tutor not found" });
+    }
+});
 const deleteTutor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
@@ -39,7 +50,7 @@ const deleteTutor = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.status(204).json({});
     }
     catch (error) {
-        res.status(404).json({ success: "false", msg: "Tutor not found" });
+        res.status(404).json({ success: false, msg: "Tutor not found" });
     }
 });
 module.exports = {
