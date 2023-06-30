@@ -80,20 +80,9 @@ TutorSchema.pre('save', function () {
     return __awaiter(this, void 0, void 0, function* () {
         if (!this.isModified('password'))
             return;
-        const salt = yield bcrypt.genSalt(10);
+        const salt = yield bcrypt.genSalt(5);
         this.password = yield bcrypt.hash(this.password, salt);
     });
 });
-TutorSchema.methods.createJWT = function () {
-    return jwt.sign({ userId: this._id, name: this.name }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_LIFETIME
-    });
-};
-TutorSchema.methods.checkPassword = function (password) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const result = yield bcrypt.compare(password, this.hashedPassword);
-        return result;
-    });
-};
 const TutorModel = mongoose_1.default.model("Tutor", TutorSchema);
 exports.default = TutorModel;

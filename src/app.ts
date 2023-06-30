@@ -1,6 +1,7 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 dotenv.config();
+const cookieParser = require('cookie-parser');
 
 const app : Express = express();
 
@@ -12,6 +13,7 @@ import { connectDB } from './db/connect'
 
 // middleware
 app.use(express.json())
+app.use(cookieParser())
 
 // route
 app.use("", router);

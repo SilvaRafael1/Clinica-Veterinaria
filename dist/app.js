@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
+const cookieParser = require('cookie-parser');
 const app = (0, express_1.default)();
 // imports
 const router = require('./routes/routes');
@@ -22,6 +23,7 @@ const router = require('./routes/routes');
 const connect_1 = require("./db/connect");
 // middleware
 app.use(express_1.default.json());
+app.use(cookieParser());
 // route
 app.use("", router);
 const port = process.env.PORT || 3000;
