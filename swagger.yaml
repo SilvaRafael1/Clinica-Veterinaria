@@ -1,0 +1,376 @@
+openapi: 3.0.0
+info:
+  title: Veterinary Project
+  contact: {}
+  version: '1.0'
+servers:
+- url: http://localhost:3000/
+  variables: {}
+paths:
+  /tutors:
+    get:
+      tags:
+      - Tutor
+      summary: Get Tutors
+      operationId: getTutors
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication Token'
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /tutor:
+    post:
+      tags:
+      - Tutor
+      summary: Create Tutor
+      operationId: createTutor
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/createTutorRequest'
+              - example:
+                  name: rafael
+                  password: secret
+                  email: rafa@rafael.com
+                  phone: '312312'
+                  date_of_birth: 05/07/2003
+                  zipcode: '95705026'
+            example:
+              name: rafael
+              password: secret
+              email: rafa@rafael.com
+              phone: '312312'
+              date_of_birth: 05/07/2003
+              zipcode: '95705026'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /tutor/{id}:
+    put:
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication Token'
+        required: true
+        style: simple
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: 'Get tutor ID'
+        required: true
+        style: simple
+        schema:
+          type: string
+      tags:
+      - Tutor
+      summary: Update Tutor
+      operationId: updateTutor
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/updateTutorRequest'
+              - example:
+                  zona: Rafael A. da Silva
+            example:
+              zona: Rafael A. da Silva
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+      - Tutor
+      summary: Delete Tutor
+      operationId: deleteTutor
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication Token'
+        required: true
+        style: simple
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: 'Get tutor ID'
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /auth:
+    post:
+      tags:
+      - Auth
+      summary: Auth
+      operationId: Auth
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/AuthRequest'
+              - example:
+                  email: rafa@rafael.com
+                  password: secret
+            example:
+              email: rafa@rafael.com
+              password: secret
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /pet/{tutorId}:
+    parameters:
+      - name: token
+        in: header
+        description: 'Authentication Token'
+        required: true
+        style: simple
+        schema:
+          type: string
+      - name: tutorId
+        in: path
+        description: 'Get tutor ID'
+        required: true
+        style: simple
+        schema:
+          type: string
+    post:
+      tags:
+      - Pets
+      summary: Create Pet
+      operationId: createPet
+      parameters:
+      - name: token
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/createPetRequest'
+              - example:
+                  name: Lilo
+                  specie: dog
+                  carry: p
+                  weight: 5
+                  date_of_birth: 06/07/2015
+            example:
+              name: Lilo
+              specie: dog
+              carry: p
+              weight: 5
+              date_of_birth: 06/07/2015
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /pet/{petId}/tutor/{tutorId}:
+    parameters:
+      - name: token
+        in: header
+        description: 'Authentication Token'
+        required: true
+        style: simple
+        schema:
+          type: string
+      - name: tutorId
+        in: path
+        description: 'Get tutor ID'
+        required: true
+        style: simple
+        schema:
+          type: string
+      - name: petId
+        in: path
+        description: 'Get pet ID'
+        required: true
+        style: simple
+        schema:
+          type: string
+    put:
+      tags:
+      - Pets
+      summary: Update Pet
+      operationId: updatePet
+      parameters:
+      - name: token
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/updatePetRequest'
+              - example:
+                  phone: '123'
+            example:
+              phone: '123'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+      - Pets
+      summary: Delete Pet
+      operationId: deletePet
+      parameters:
+      - name: token
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    createTutorRequest:
+      title: createTutorRequest
+      required:
+      - name
+      - password
+      - email
+      - phone
+      - date_of_birth
+      - zipcode
+      type: object
+      properties:
+        name:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        date_of_birth:
+          type: string
+        zipcode:
+          type: string
+      example:
+        name: rafael
+        password: secret
+        email: rafa@rafael.com
+        phone: '312312'
+        date_of_birth: 05/07/2003
+        zipcode: '95705026'
+    updateTutorRequest:
+      title: updateTutorRequest
+      required:
+      - zona
+      type: object
+      properties:
+        zona:
+          type: string
+      example:
+        zona: Rafael A. da Silva
+    AuthRequest:
+      title: AuthRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: rafa@rafael.com
+        password: secret
+    createPetRequest:
+      title: createPetRequest
+      required:
+      - name
+      - specie
+      - carry
+      - weight
+      - date_of_birth
+      type: object
+      properties:
+        name:
+          type: string
+        specie:
+          type: string
+        carry:
+          type: string
+        weight:
+          type: integer
+          format: int32
+        date_of_birth:
+          type: string
+      example:
+        name: Lilo
+        specie: dog
+        carry: p
+        weight: 5
+        date_of_birth: 06/07/2015
+    updatePetRequest:
+      title: updatePetRequest
+      required:
+      - phone
+      type: object
+      properties:
+        phone:
+          type: string
+      example:
+        phone: '123'
+tags:
+- name: Tutor
+- name: Auth
+- name: Pets

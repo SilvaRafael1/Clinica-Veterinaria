@@ -14,18 +14,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const path_1 = __importDefault(require("path"));
+const cors_1 = __importDefault(require("cors"));
 dotenv_1.default.config();
-const cookieParser = require('cookie-parser');
 const app = (0, express_1.default)();
-// imports
 const router = require('./routes/routes');
+// Swagger
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const yamljs_1 = __importDefault(require("yamljs"));
+const swagger_path = path_1.default.resolve(__dirname, '../swagger.yaml');
+const swaggerDocument = yamljs_1.default.load(swagger_path);
 // database
 const connect_1 = require("./db/connect");
 // middleware
 app.use(express_1.default.json());
-app.use(cookieParser());
+app.use((0, cors_1.default)());
 // route
 app.use("", router);
+app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
 const port = process.env.PORT || 3000;
 const start = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
