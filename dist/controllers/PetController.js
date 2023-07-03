@@ -60,7 +60,7 @@ const deletePet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(204).json({});
     }
     catch (error) {
-        res.status(400).json({ success: false, msg: error.message });
+        res.status(404).json({ success: false, msg: "Pet not found" });
     }
 });
 module.exports = {

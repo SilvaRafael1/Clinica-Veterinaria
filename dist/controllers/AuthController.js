@@ -20,16 +20,16 @@ dotenv_1.default.config();
 const Auth = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
-        if (!(email || password)) {
-            return res.status(400).send("All input is required");
+        if (!(email && password)) {
+            return res.status(400).json("All input is required");
         }
         const tutor = yield Tutor_1.default.findOne({ email });
         if (!tutor) {
-            return res.status(401).send("Invalid Credential");
+            return res.status(401).json("Invalid Credential");
         }
         const comparePassword = yield bcrypt.compare(password, tutor === null || tutor === void 0 ? void 0 : tutor.password);
         if (!comparePassword) {
-            return res.status(401).send("Invalid Credential");
+            return res.status(401).json("Invalid Credential");
         }
         const token = jsonwebtoken_1.default.sign({ user_id: tutor === null || tutor === void 0 ? void 0 : tutor._id, email }, process.env.JWT_SECRET, {
             expiresIn: process.env.JWT_LIFETIME,

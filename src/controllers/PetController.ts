@@ -42,6 +42,7 @@ const deletePet = async (req: Request, res: Response) => {
     if (!pet) {
       return res.status(404).json({ success: false, msg: "Pet not found"})
     }
+    
     const tutor = await TutorModel.findOne({ _id: tutorId });
     if (!tutor) {
       return res.status(404).json({ success: false, msg: "Tutor not found"})
@@ -50,7 +51,7 @@ const deletePet = async (req: Request, res: Response) => {
     await PetModel.findOneAndRemove({ _id: petId });
     res.status(204).json({});
   } catch (error: any) {
-    res.status(400).json({ success: false, msg: error.message });
+    res.status(404).json({ success: false, msg: "Pet not found"})
   }
 };
 

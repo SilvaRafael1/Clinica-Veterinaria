@@ -26,18 +26,21 @@ const createTutor = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.status(201).json({ success: true, data: tutor });
     }
     catch (error) {
+        if (error.code === 11000) {
+            return res.status(400).json({ success: false, msg: "Email address is already registered" });
+        }
         res.status(400).json({ success: false, msg: error.message });
     }
 });
 const updateTutor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
-        yield Tutor_1.default.findOneAndUpdate({ _id: id }, req.body);
         const tutor = yield Tutor_1.default.findOne({ _id: id });
         if (!tutor) {
             return res.status(404).json({ success: false, msg: "Tutor not found" });
         }
-        res.status(200).json({ success: true, msg: "Tutor updated", data: tutor });
+        const tutorUpdated = yield Tutor_1.default.findOneAndUpdate({ _id: id }, req.body).populate('pets');
+        res.status(200).json({ success: true, msg: "Tutor updated", data: tutorUpdated });
     }
     catch (error) {
         res.status(404).json({ success: false, msg: "Tutor not found" });
@@ -47,8 +50,10 @@ const deleteTutor = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     const { id } = req.params;
     try {
         const tutor = yield Tutor_1.default.findOne({ _id: id }).populate('pets');
-        if ((tutor === null || tutor === void 0 ? void 0 : tutor.pets.length) !== 0) {
-            console.log(tutor === null || tutor === void 0 ? void 0 : tutor.pets.length);
+        if (!tutor) {
+            return res.status(404).json({ success: false, msg: "Tutor not found" });
+        }
+        if (!((tutor === null || tutor === void 0 ? void 0 : tutor.pets.length) === 0)) {
             return res.status(400).json({ success: false, msg: "Tutor have pets associated" });
         }
         yield Tutor_1.default.findByIdAndRemove({ _id: id });

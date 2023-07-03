@@ -14,6 +14,9 @@ const createTutor = async (req: Request, res: Response) => {
     const tutor = await TutorModel.create(req.body);
     res.status(201).json({ success: true, data: tutor });
   } catch (error: any) {
+    if (error.code === 11000) {
+      return res.status(400).json({ success: false, msg: "Email address is already registered" })
+    }
     res.status(400).json({ success: false, msg: error.message });
   }
 };
@@ -21,12 +24,12 @@ const createTutor = async (req: Request, res: Response) => {
 const updateTutor = async (req: Request, res: Response) => {
   const {id} = req.params
   try {
-    await TutorModel.findOneAndUpdate({ _id: id }, req.body)
     const tutor = await TutorModel.findOne({ _id: id })
     if (!tutor) {
       return res.status(404).json({ success: false, msg: "Tutor not found" });
     }
-    res.status(200).json({ success: true, msg: "Tutor updated", data: tutor });
+    const tutorUpdated = await TutorModel.findOneAndUpdate({ _id: id }, req.body).populate('pets');
+    res.status(200).json({ success: true, msg: "Tutor updated", data: tutorUpdated });
   } catch (error: any) {
     res.status(404).json({ success: false, msg: "Tutor not found" });
   }
@@ -36,10 +39,14 @@ const deleteTutor = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     const tutor = await TutorModel.findOne({ _id: id }).populate('pets')
-    if (tutor?.pets.length !== 0) {
-      console.log(tutor?.pets.length)
+    if (!tutor) {
+      return res.status(404).json({ success: false, msg: "Tutor not found" });
+    }
+
+    if (!(tutor?.pets.length === 0)) {
       return res.status(400).json({ success: false, msg: "Tutor have pets associated" });
     }
+
     await TutorModel.findByIdAndRemove({ _id: id });
     res.status(204).json({});
   } catch (error) {
