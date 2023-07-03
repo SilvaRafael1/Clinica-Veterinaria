@@ -1,6 +1,5 @@
 import mongoose, { Schema } from "mongoose";
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 
 const TutorSchema = new mongoose.Schema({
   name: {

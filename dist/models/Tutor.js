@@ -34,7 +34,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const TutorSchema = new mongoose_1.default.Schema({
     name: {
         type: String,
