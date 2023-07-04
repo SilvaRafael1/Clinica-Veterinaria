@@ -27,7 +27,8 @@ const updatePet = async (req: Request, res: Response) => {
     if (!tutor) {
       return res.status(404).json({ success: false, msg: "Tutor not found"})
     }
-    const petUpdated = await PetModel.findOneAndUpdate({ _id: petId }, req.body)
+    await PetModel.findOneAndUpdate({ _id: petId }, req.body)
+    const petUpdated =  await PetModel.findOne({ _id: petId })
     res.status(200).json({ success: true, msg: "Pet updated", data: petUpdated });
   } catch (error:any) {
     res.status(404).json({ success: false, msg: "Pet not found" });

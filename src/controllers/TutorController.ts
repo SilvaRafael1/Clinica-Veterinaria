@@ -28,7 +28,8 @@ const updateTutor = async (req: Request, res: Response) => {
     if (!tutor) {
       return res.status(404).json({ success: false, msg: "Tutor not found" });
     }
-    const tutorUpdated = await TutorModel.findOneAndUpdate({ _id: id }, req.body).populate('pets');
+    await TutorModel.findOneAndUpdate({ _id: id }, req.body).populate('pets');
+    const tutorUpdated = await TutorModel.findOne({ _id: id })
     res.status(200).json({ success: true, msg: "Tutor updated", data: tutorUpdated });
   } catch (error: any) {
     res.status(404).json({ success: false, msg: "Tutor not found" });

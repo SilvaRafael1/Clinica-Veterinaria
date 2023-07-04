@@ -38,7 +38,8 @@ const updatePet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (!tutor) {
             return res.status(404).json({ success: false, msg: "Tutor not found" });
         }
-        const petUpdated = yield Pet_1.default.findOneAndUpdate({ _id: petId }, req.body);
+        yield Pet_1.default.findOneAndUpdate({ _id: petId }, req.body);
+        const petUpdated = yield Pet_1.default.findOne({ _id: petId });
         res.status(200).json({ success: true, msg: "Pet updated", data: petUpdated });
     }
     catch (error) {
