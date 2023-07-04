@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx tsc",
     "eslint:fix": "eslint --fix",
-    "start": "node dist/app.js",
+    "start": "concurrently \"npx tsc --watch\" \"nodemon -q dist/app.js\"",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/app.js\""
   },
   "keywords": [],
