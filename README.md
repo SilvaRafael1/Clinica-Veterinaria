@@ -1,6 +1,6 @@
 <p align="center">
-Projeto Clínica Veterinária
-Parte 2
+Veterinary Clinic Project
+Part 2
 
 ![em_desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=RED&style=for-the-badge)
 
@@ -8,47 +8,47 @@ Parte 2
 
 <hr>
 
-### Tópicos
+### Tópics
 
-- [Descrição do Projeto](#descrição-do-projeto)
+- [Project description](#project-description)
 
-- [Funcionalidades](#funcionalidades)
+- [Functionalities](#functionalities)
 
-- [Ferramentas utilizadas](#ferramentas-utilizadas)
+- [Technologies used](#technologies-used)
 
-- [API's utilizadas](#apis-utilizadas)
+- [API's used](#apis-used)
 
-- [Abrir e rodar o Projeto](#abrir-e-rodar-o-projeto)
+- [Open and run the Project](#open-and-run-the-project)
 
-- [Contato](#contato)
+- [Contact](#contact)
 
-## Descrição do projeto
+## Project description
 
 <p align="justify">
-Projeto provido pela empresa UOL Compass.
+Project provided by the company UOL Compass.
 
-Aplicativo de serviço de uma Clínica Veterinária onde é possível gerenciar e administrar seus tutores e pet's associados.
+Service application of a Veterinary Clinic where you can manage and administer your tutors and pet's associates.
 </p>
 
-## Funcionalidades
+## Functionalities
 
-:heavy_plus_sign: `Autenticação:` Realizar checagem para ver se está autenticado no sistema.
+:heavy_plus_sign: `Authentication:` Perform check to see if you are authenticated on the system.
 
-:white_check_mark: `Chegar a lista de tutores:` Retorna ao usuário uma lista completa com todos os tutores da clínica.
+:white_check_mark: `Get the list of tutors:` Returns to the user a complete list with all tutors in the clinic.
 
-:heavy_plus_sign: `Adicionar novos tutores:` Possibilidade de adição de novos tutores na clínica.
+:heavy_plus_sign: `Add new tutors:` Possibility of adding new tutors in the clinic.
 
-:sparkles: `Atualizar tutores:` Atualiza tutores já adicionados na clínica, podendo adicionar ou remover informações.
+:sparkles: `Update tutors:` Updates tutors already added in the clinic, being able to add or remove information.
 
-:boom: `Deletar tutores:` Deleta um tutor do sistema.
+:boom: `Delete tutors:` Deletes a tutor from the system.
 
-:heavy_plus_sign: `Adicionar pets:` Adiciona um novo pet e já atribui a um tutor existente.
+:heavy_plus_sign: `Add pets:` Adds a new pet and already assigns it to an existing guardian.
 
-:sparkles: `Atualiza pets:` Atualiza pets já adicionados na clínica, podendo adicionar ou remover informações.
+:sparkles: `Updates pets:` Updates pets already added in the clinic, being able to add or remove information.
 
-:boom: `Deletar pets:` Deleta um pet do sistema.
+:boom: `Delete pets:` Deletes a pet from the system.
 
-## Ferramentas utilizadas
+## Technologies used
 
 <a href="https://www.typescriptlang.org" target="_blank"> <img src="https://www.tutorialsteacher.com/Content/images/home/typescript.svg" alt="TypeScript" width="40" height="40"/> </a> TypeScript
 
@@ -56,25 +56,25 @@ Aplicativo de serviço de uma Clínica Veterinária onde é possível gerenciar 
 
 <a href="https://expressjs.com/pt-br/" target="_blank"> <img src="https://ih1.redbubble.net/image.438908244.6144/st,small,507x507-pad,600x600,f8f8f8.u2.jpg" alt="Express" width="40" height="40"/> </a> Express
 
-## API's utilizadas
+## API's used
 
 - [MongoDB](https://www.mongodb.com)
 - [Swagger](https://swagger.io)
 - [Prettier](https://prettier.io)
 - [ESLint](https://eslint.org)
 
-## Abrir e rodar o projeto
+## Open and run the Project
 
-Após clonar o projeto o projeto para o seu computador, você deve:
+After cloning the project to your computer, you must:
 
-- Abrir algum terminal no diretório base do projeto
-- Executar o comando `npm i` para instalar todas as dependências
-- Após a instalação, executar o comando `npm start` para abrir o servidor
+- Open some terminal in the base directory of the project
+- Run `npm i` command to install all dependencies
+- After installation, run the `npm start` command to open the server
 
-- Caso queira abrir o servidor e alterar os códigos e deixar que o terminal transpile automaticamente, você deve invés de executar o `npm start`, deve utilizar o `npm run build`
+- If you want to open the server and change the codes and let the terminal transpile automatically, you should instead of running `npm start`, you should use `npm run build`
 
-## Contato
+## Contact
 
-Desenvolvido por Rafael Augusto da Silva
+Developed by Rafael Augusto da Silva
 
-Dúvidas? Envie um e-mail para: rafael.silva.pb@compasso.com.br
+Doubts? Send an email to: rafael.silva.pb@compasso.com.br
